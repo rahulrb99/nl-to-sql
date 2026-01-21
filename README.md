@@ -81,7 +81,7 @@ uvicorn main:app --reload
 The API will be available at:
 http://127.0.0.1:8000
 
-🧠 Key Learnings
+### 🧠 Key Learnings
 LLM outputs must be validated before execution
 
 Prompt design significantly affects SQL accuracy
@@ -90,7 +90,7 @@ Backend safeguards are essential for AI systems
 
 System design matters more than model choice
 
-📌 Future Improvements
+### 📌 Future Improvements
 Authentication and rate limiting
 
 Support for multiple datasets
@@ -99,6 +99,6 @@ Query performance optimization
 
 Enhanced frontend UI
 
-📄 License
+### 📄 License
 This project is for educational and portfolio purposes.
 
