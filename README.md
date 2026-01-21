@@ -26,17 +26,12 @@ It exposes a FastAPI backend that validates generated SQL and executes read-only
 ## 🏗️ System Architecture
 
 
-User Question
-↓
-Prompt + Database Schema
-↓
-LLM (SQL Generation)
-↓
-SQL Validator (SELECT-only)
-↓
-Database Execution
-↓
-API Response
+1. User submits a natural language question  
+2. Question is combined with database schema in the prompt  
+3. LLM generates a SQL query  
+4. SQL validator ensures only SELECT queries are allowed  
+5. Query is executed on the database  
+6. Results are returned via API
 
 **Why validation?**  
 LLMs are probabilistic. SQL validation ensures only safe, read-only queries are executed.
@@ -74,7 +69,6 @@ This makes it suitable for analytical business questions.
 ## ▶️ How to Run
 
 ### 1. Install dependencies
-```bash
 pip install -r requirements.txt
 
 2. Set environment variables
@@ -108,4 +102,3 @@ Enhanced frontend UI
 📄 License
 This project is for educational and portfolio purposes.
 
-    
