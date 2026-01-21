@@ -71,11 +71,11 @@ This makes it suitable for analytical business questions.
 ### 1. Install dependencies
 pip install -r requirements.txt
 
-2. Set environment variables
+### 2. Set environment variables
 Create a .env file:
 GEMINI_API_KEY=your_api_key_here
 
-3. Start the server
+### 3. Start the server
 uvicorn main:app --reload
 
 The API will be available at:
