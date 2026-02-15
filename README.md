@@ -17,7 +17,7 @@ It exposes a FastAPI backend that validates generated SQL and executes read-only
 ## 🧱 Tech Stack
 - Python
 - FastAPI
-- SQL (SQLite / PostgreSQL)
+- PostgreSQL
 - Large Language Model (Gemini)
 - HTML / JavaScript (simple frontend)
 
@@ -69,14 +69,19 @@ This makes it suitable for analytical business questions.
 ## ▶️ How to Run
 
 ### 1. Install dependencies
+```bash
 pip install -r requirements.txt
+```
 
 ### 2. Set environment variables
-Create a .env file:
-GEMINI_API_KEY=your_api_key_here
+Copy `.env.example` to `.env` and set:
+- `GEMINI_API_KEY` (required) — your Gemini API key
+- `DB_HOST`, `DB_NAME`, `DB_USER`, `DB_PASSWORD` (optional) — PostgreSQL connection; default host/db/user are `localhost` / `nl2sql` / `postgres`
 
 ### 3. Start the server
+```bash
 uvicorn main:app --reload
+```
 
 The API will be available at:
 http://127.0.0.1:8000

@@ -1,5 +1,6 @@
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
+from fastapi.middleware.cors import CORSMiddleware
 
 from db.schema_extractor import get_schema
 from prompts.nl2sql_prompt import build_nl2sql_prompt
@@ -9,6 +10,17 @@ from db.sql_executor import execute_sql
 
 # THIS LINE IS CRITICAL
 app = FastAPI(title="NL to SQL API")
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=[
+        "http://localhost:3000",
+        "http://127.0.0.1:3000",
+    ],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 
 class QueryRequest(BaseModel):

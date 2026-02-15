@@ -7,19 +7,41 @@ FORBIDDEN_KEYWORDS = [
     "UPDATE",
     "INSERT",
     "ALTER",
-    "TRUNCATE"
+    "TRUNCATE",
+    "CREATE",
+    "GRANT",
+    "REVOKE",
+    "EXECUTE",
+    "EXEC",
+    "MERGE",
+    "REPLACE",
 ]
+
+# Match first SELECT statement: either "SELECT ... ;" or "SELECT ..." to end
+_SELECT_PATTERN = re.compile(
+    r"\bSELECT\b.*?;|\bSELECT\b.*",
+    re.IGNORECASE | re.DOTALL,
+)
 
 
 def extract_sql(text: str) -> str:
     """
     Cleans LLM output and extracts raw SQL.
-    Removes markdown fences and extra text.
+    Removes markdown fences, then finds the first SELECT statement.
     """
+    # Remove markdown code fences
+    text = re.sub(r"```\s*sql\s*", "", text, flags=re.IGNORECASE)
+    text = re.sub(r"```\s*", "", text)
+    text = text.strip()
 
-    # Remove ```sql and ``` if present
-    text = re.sub(r"```sql", "", text, flags=re.IGNORECASE)
-    text = re.sub(r"```", "", text)
+    # If it already starts with SELECT, use it (after stripping trailing ```)
+    if text.upper().startswith("SELECT"):
+        return text.strip()
+
+    # Otherwise find first SELECT statement
+    match = _SELECT_PATTERN.search(text)
+    if match:
+        return match.group(0).strip().rstrip(";").strip()
 
     return text.strip()
 

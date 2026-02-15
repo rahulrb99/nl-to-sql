@@ -1,12 +1,10 @@
 import psycopg2
 
+from db.config import get_connection_params
+
+
 def get_schema():
-    conn = psycopg2.connect(
-        host="localhost",
-        database="nl2sql",      # your DB name
-        user="postgres",
-        password="Edgeverve@1234"
-    )
+    conn = psycopg2.connect(**get_connection_params())
 
     cur = conn.cursor()
 
